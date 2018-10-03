@@ -2,6 +2,7 @@ package com.ipartek.formacion.libro.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,15 +18,13 @@ import com.ipartek.formacion.libro.pojo.Pagina;
 /**
  * Servlet implementation class BuscaController
  */
-@WebServlet("/busca")
-public class BuscaController extends HttpServlet {
+@WebServlet("/buscar")
+public class BusquedaController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	
-	private static final String MSG_NO_RESULTADOS = "Lo sentimos. No hay ninguna página que mostrar con su búsqueda.";
-	PaginaArrayListDAO dao;
-	ArrayList<Pagina> paginas;
-	ArrayList<Pagina> pagsEncontradas;
+	private PaginaArrayListDAO dao;
+	private ArrayList<Pagina> paginas;
+	private Pagina mostrar_pagina;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -57,48 +56,28 @@ public class BuscaController extends HttpServlet {
 		doProccess(request, response);
 	}
 
-	private void doProccess(HttpServletRequest request, HttpServletResponse response) {
-		Alert alert = new Alert (MSG_NO_RESULTADOS, Alert.PRIMARY);
+	private void doProccess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String palabra = request.getParameter("palabra");
 		
-		try {
-			
-			String texto = request.getParameter("busqueda");
-			
-			if (texto != null && !texto.trim().isEmpty()) {
-				
-				buscarTexto(texto);
-				if (pagsEncontradas != null) {
-					request.setAttribute("pagsEncontradas", pagsEncontradas);
-					request.getRequestDispatcher("resultados.jsp").forward(request, response);
-				
-				} else {
-					request.setAttribute("alert", alert);
-					request.getRequestDispatcher("home.jsp").forward(request, response);
-				}
-			}  else {
-				request.getRequestDispatcher("home.jsp").forward(request, response);
-			}
-			
-		} catch (Exception e) {
-			
-			e.printStackTrace();
+		if(palabra != null) {
+			request.setAttribute("palabra", buscarTexto(palabra));
 		}
 		
+		request.getRequestDispatcher("resultados.jsp").forward(request, response);
 	}
-
-	private void buscarTexto(String texto) {
-		
-		paginas = (ArrayList<Pagina>) dao.getAll();
-		pagsEncontradas = new ArrayList<>();
-		
-		for (Pagina p: paginas) {
-			if (p.getContenido().contains(texto) || p.getAutor().contains(texto)) {
-				pagsEncontradas.add(p);
-				System.out.println(p.getAutor());
-			}
-		}
-		
-		
-	}
-
+	
+	public String buscarTexto(String palabra) {
+		String mostrarBus= "No se ha encontrado nada!";
+        int id;
+        for( int i = 0 ; i  < paginas.size(); i++){
+            if(paginas.get(i).getContenido().equals(palabra)){
+                paginas.get(i).getContenido();
+                mostrarBus += "n"+"n";
+            }                        
+       }
+	        return mostrarBus;
+	        
+	        
+	       
+    }
 }

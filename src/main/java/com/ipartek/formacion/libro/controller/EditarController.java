@@ -1,6 +1,7 @@
 package com.ipartek.formacion.libro.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import javax.servlet.ServletConfig;
@@ -18,17 +19,15 @@ import com.ipartek.formacion.libro.pojo.Usuario;
 /**
  * Servlet implementation class PublicarController
  */
-@WebServlet("/publicar")
-public class PublicarController extends HttpServlet {
-
+@WebServlet("/editar")
+public class EditarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final int MIN_LONG_CONTENIDO = 25; // 25 palabras
+	private static final int MINIMO_PALABRAS = 25; 
 
-	private static final String MSG_INSERTADO_CORRECTO = "La página ha sido correctamente publicada.";
-
-	Pagina nuevaPag;
 	private PaginaArrayListDAO dao;
+	private ArrayList<Pagina> paginas;
+	private Pagina pagina_escrita;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -70,13 +69,23 @@ public class PublicarController extends HttpServlet {
 		Alert alert = new Alert();
 
 		try {
+			String contenido = request.getParameter("contenido");
 
-			crearPagina(request);
+			Usuario u = (Usuario) request.getSession().getAttribute("usuario");
+
+			if (u != null) {
+				if (palabras(contenido)) {
+					pagina_escrita = new Pagina(dao.getAll().size(), contenido , u.getNombre());
+				}
+			}
 			
-			if (nuevaPag != null) {
-				dao.insert(nuevaPag);
-				alert.setTexto(MSG_INSERTADO_CORRECTO);
-				alert.setTipo(Alert.SUCCESS);
+			if (pagina_escrita != null) {
+				dao.insert(pagina_escrita);
+				alert.setTexto("Enhorabuena "+ u.getNombre() + " ha publicado una página. Gracias por su colaboración");
+				alert.setTipo(Alert.PRIMARY);
+			}else {
+				alert.setTexto(u.getNombre() + " no has publicado nada. La longitud minima del texto ha de ser " + MINIMO_PALABRAS );
+				alert.setTipo(Alert.PRIMARY);
 			}
 
 		} catch (Exception e) {
@@ -87,39 +96,27 @@ public class PublicarController extends HttpServlet {
 			
 			request.getSession().setAttribute("alert", alert);
 			request.setAttribute("numPaginas", dao.getAll().size());
-			request.getRequestDispatcher("backoffice/escribir-pag.jsp").forward(request, response);
+			request.getRequestDispatcher("backoffice/editar.jsp").forward(request, response);
 		}
 
 	}
 
-	private void crearPagina(HttpServletRequest request) {
-
-		// Recoger Parámetros
-		String titulo = request.getParameter("titulo");
-		String contenido = request.getParameter("contenido");
-
-		// El usuario lo cogeremos de la sesión
-		Usuario user = (Usuario) request.getSession().getAttribute("usuario");
-
-		if (user != null) {
-			if (comprobarNumPalabras(contenido)) {
-				nuevaPag = new Pagina(dao.getAll().size(), titulo, contenido);
-			}
-		}
-
-	}
-
-	/**
-	 * Procedimiento privado que comprueba si el contenido tiene la longitud
-	 * correcta.
-	 * 
-	 * @param contenido, String
-	 * @return true <=> contenido > MIN_LONG_CONTENIDO palabras
-	 */
-	private boolean comprobarNumPalabras(String contenido) {
+	/*Contar palabras*/
+	private boolean palabras(String contenido) {
 
 		StringTokenizer tokens = new StringTokenizer(contenido, " ");
-		return tokens.countTokens() >= MIN_LONG_CONTENIDO;
+		if (tokens.countTokens() > MINIMO_PALABRAS) {	
+			
+			StringBuilder sb = new StringBuilder();
+			
+			for (int i = 0; i < MINIMO_PALABRAS; i++) {
+				sb.append(tokens.nextToken() + " ");
+			}
+			
+			return true;
+		} 	
+		
+		return false;
 	}
 
 }

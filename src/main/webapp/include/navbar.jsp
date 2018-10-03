@@ -3,11 +3,11 @@
 
 <header class="mb-3">
 	<!-- HEADER NAVBAR -->
-	<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
-		<a class="navbar-brand" href="inicio"></a>
-	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Menú de navegación">
-	    	<span class="navbar-toggler-icon"></span>
-	    </button>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="inicio">Imagen</a>
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+       		<span class="navbar-toggler-icon"></span>
+     	</button>
 	
 	   	<div class="collapse navbar-collapse" id="navbar">
 	    	<ul class="navbar-nav mr-auto">
@@ -15,27 +15,32 @@
 	            <a class="nav-link text-white" href="inicio"><i class="fas fa-home"></i>Inicio </a>
 	          </li>
 	          	<!-- Usuario logueado (panel de backoffice) -->
-		      	<c:if test="${not empty sessionScope.usuario}"> 
-		           	<li class="nav-item">
-	            		<a class="nav-link text-white" href="backoffice/escribir-pag.jsp"><i class="fas fa-pencil-alt"></i>Escribir entrada </a>
-	          		</li>
-		        </c:if>
-		        
+	          	<!-- usuario logeado -->
+			    <c:if test="${not empty sessionScope.usuario}">
+		    		<ul class="navbar-nav mr-auto">
+		      			<li class="nav-item active">
+		        			<a class="nav-link"><i class="fas fa-user">${usuario.nombre}</i></a>
+		      			</li>
+		      			<li class="nav-item">
+		        			<a class="nav-link" href="backoffice/editar.jsp">Escribir Página</a>
+		      			</li>
+		      			<li class="nav-item">
+		        			<a class="nav-link disabled" href="logout">Cerrar Session</a>
+		      			</li>
+		    		</ul>
+				</c:if>        
 		        <!-- Usuario no logueado (link de acceso) -->
-	            <c:if test="${empty sessionScope.usuario}"> 
-	            	<li class="nav-item">
-		        		<a class="nav-link text-white" href="login.jsp"><i class ="fas fa-sign-in-alt "></i>Acceder</a>
-		        	</li>
-		        </c:if>
+		        <c:if test="${empty sessionScope.usuario}">
+						<ul class="navbar-nav mr-auto">
+		      			<li class="nav-item active">
+		        			<a class="nav-link" href="inicio">Leer Libro</a>
+		      			</li>
+		      			<li class="nav-item">
+		        			<a class="nav-link" href="login.jsp">Iniciar sesion</a>
+		      			</li>
+		    		</ul>
+			       </c:if>   
 	        </ul>
-	        
-	        <!-- Usuario logueado (panel de usuario) -->
-            <c:if test="${not empty sessionScope.usuario}"> 
-	        	<div class="nav-user text-white">
-		     		<i class="fas fa-user mr-2"></i><span>${sessionScope.usuario.nombre}</span>
-			  		<a href="logout" title="Cerrar sesión"><i class="fas fa-power-off ml-2 text-white"></i></a>
-		    	</div>
-            </c:if>       
 	      </div>
 	</nav>    
 </header>

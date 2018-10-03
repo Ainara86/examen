@@ -17,22 +17,29 @@
 	
 	<div class="row align-middle">
         <div class="col-md-12 color-primary">
-        <form action="login" method="post">
-		  
-		  <div class="form-group">
-		    <label for="usuario">Usuario</label>
-		    <input type="text" class="form-control" id="usuarioNombre" name="usuarioNombre" placeholder="Mínimo 5 caracteres" >
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="psw">Contraseña</label>
-		    <input type="password" class="form-control" id="pass" name="pass" placeholder="Mínimo 5 caracteres" min="5">
-		  </div>
-		  
-		
-		  <button type="submit" class="btn btn-primary">Acceder</button>
-		  
-		</form>
+         <form id="login-form" action="login" method="post">
+			
+                <div class="form-row justify-content-center">
+                            
+                    <div class="col col-md-6">
+                        
+                        <div class="form-group">
+                            <label for="usuarioNombre" class="required">Email</label>
+                            <input name="usuarioNombre" type="text" class="form-control" id="usuarioNombre" autofocus required placeholder="Ej: paco" />
+                        </div>
+                                    
+                        <div class="form-group">
+                            <label for="pass" class="required">Contraseña</label>
+                            <input name="pass" type="password" class="form-control" id="pass" required placeholder="Contraseña del usuario" />
+                        </div>
+                                    
+                        <button type="submit" class="btn btn-outline-primary btn-block">Acceder</button>
+                                    
+                    </div>
+                                    
+                </div>
+                            
+            </form>
         </div> <!--  ./col -->
     </div> <!--  ./row -->
 </main>

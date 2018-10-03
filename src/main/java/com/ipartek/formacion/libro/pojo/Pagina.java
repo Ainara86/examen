@@ -4,7 +4,7 @@ import java.util.StringTokenizer;
 
 public class Pagina {
 
-	private static final int TEXTO_MINIMO=25;
+	private static final int MINIMO_PALABRAS=25;
 	private int num_pagina;	
 	private String contenido;
 	private String autor;
@@ -40,23 +40,23 @@ public class Pagina {
 	}
 
 
-	public String palabras() {
+	public boolean palabras(String contenido) {
 		
 		String texto = this.contenido;	
 		StringTokenizer tokens = new StringTokenizer(texto, " ");
 		
-		if (tokens.countTokens() > TEXTO_MINIMO) {	// Si el texto es mayor que LONGITUD_TEXTO_ABREVIADO
+		if (tokens.countTokens() > MINIMO_PALABRAS) {	// Si el texto es mayor que LONGITUD_TEXTO_ABREVIADO
 			
 			StringBuilder sb = new StringBuilder();
 			
-			for (int i = 0; i < TEXTO_MINIMO; i++) {
+			for (int i = 0; i < MINIMO_PALABRAS; i++) {
 				sb.append(tokens.nextToken() + " ");
 			}
 			
-			texto = sb.toString();
+			return true;
 		} 	
 		
-		return texto;	
+		return false;	
 	}
 
 	public String getAutor() {

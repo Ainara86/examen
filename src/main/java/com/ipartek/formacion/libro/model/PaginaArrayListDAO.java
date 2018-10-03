@@ -25,11 +25,9 @@ public class PaginaArrayListDAO implements CrudAble<Pagina> {
 
 	private void crearPagsMock() {
 
-		paginas.add(new Pagina(0, "Érase una vez", "Érase una vez..."));
-		paginas.add(new Pagina(1, "una niña que era muy querida por su abuelita, a la que visitaba con frecuencia aunque vivía al otro lado del bosque. Su madre que sabía coser muy bien le había hecha una bonita caperuza roja que la niña nunca se quitaba, por lo que todos la llamaban Caperucita roja." , "William"));
-		paginas.add(new Pagina(2, "Una tarde la madre la mandó a casa de la abuelita que se encontraba muy enferma, para que le llevara unos pasteles recién horneados, una cesta de pan y mantequilla.\n" + 
-				"\n" + 
-				"– “Caperucita anda a ver cómo sigue tu abuelita y llévale esta cesta que le he preparado”, –le dijo. Además le advirtió: –“No te apartes del camino ni hables con extraños, que puede ser peligroso”." , "Pablo"));
+		paginas.add(new Pagina(0 , "Érase una vez..." , "Anonimo"));
+		paginas.add(new Pagina(1 , "una niña que era muy querida por su abuelita, a la que visitaba con frecuencia aunque vivía al otro lado del bosque. Su madre que sabía coser muy bien le había hecha una bonita caperuza roja que la niña nunca se quitaba, por lo que todos la llamaban Caperucita roja." , "William"));
+		paginas.add(new Pagina(2 , "Una tarde la madre la mandó a casa de la abuelita que se encontraba muy enferma, para que le llevara unos pasteles recién horneados, una cesta de pan y mantequilla. “Caperucita anda a ver cómo sigue tu abuelita y llévale esta cesta que le he preparado”, –le dijo. Además le advirtió: –“No te apartes del camino ni hables con extraños, que puede ser peligroso”." , "Pablo"));
 
 	}
 

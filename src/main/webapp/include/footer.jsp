@@ -1,16 +1,14 @@
-<!-- Page codification -->
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- Footer -->
+<%@page import="java.util.Date"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.net.URLDecoder"%>
 
-	<footer class="container justify-content-center">
-		<div class="row">
-			<!-- Search form -->
-			<form action="busca" class="form-inline">
-			    
-			    <input class="form-control form-control-sm ml-3" type="text" name="busqueda" placeholder="Busca aquí" aria-label="Cuadro de búsqueda">
-				 <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
-			</form>
-		</div>	
-	</footer>
+	<!-- Bootstrap core JavaScript -->
+	<script src="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/jquery/jquery.min.js"></script>
+	<script src="https://blackrockdigital.github.io/startbootstrap-shop-item/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	</body>
 
-</body>
 </html>

@@ -15,14 +15,10 @@
 		</div>
 	</c:if>
 	
-	<form action="publicar" method="post">
+	<form action="editar" method="post">
+ 
 	  <div class="form-group">
-	    <label for="titulo">Título</label>
-	    <input type="text" class="form-control" name="titulo" placeholder="De 5 a 120 caracteres." min="5" max="120">
-	  </div>
-	  
-	  <div class="form-group">
-	    <label for="contenido">Contenido de la Página</label>
+	    <label for="contenido">Escribe una nueva pagina</label>
 	    <textarea class="form-control" name="contenido" rows="5" placeholder="Mínimo 25 palabras."></textarea>
 	  </div>
 	  
@@ -31,9 +27,5 @@
 	
 </main>
 
-<!-- Pie de Página -->
-<div class="row align-center fixed-bottom">
-	<div class="col-md-12 color-primary">
+
 		<%@ include file="../include/footer.jsp" %>
-	</div>
-</div>

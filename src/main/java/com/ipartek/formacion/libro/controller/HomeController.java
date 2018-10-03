@@ -72,7 +72,9 @@ public class HomeController extends HttpServlet {
 
 			paginas = new ArrayList<Pagina>();
 			paginas = (ArrayList<Pagina>) dao.getAll();
+			
 			int numeracion = paginas.indexOf(mostrar_pagina);
+			String numPagina = request.getParameter("numPagina");
 			
 			request.setAttribute("numPaginas", paginas.size());
 
@@ -113,7 +115,18 @@ public class HomeController extends HttpServlet {
 						break;
 					}
 
-				} 
+				} else {
+					
+					
+					if (numPagina != null && !numPagina.isEmpty()) {
+						
+						numeracion = Integer.valueOf(numPagina);
+						numeracion--;	
+						mostrar_pagina = paginas.get(numeracion);
+							
+						
+					}
+				}
 
 			}
 

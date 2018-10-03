@@ -1,7 +1,7 @@
-<!-- Page codification -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- Java Standard Tag Libraries -->
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -30,7 +30,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
 	
     <!-- Personal CSS Stylesheet -->
-    <link href="css/styles.css" rel="stylesheet"></link>
+    <link href="css/styles.css?v2" rel="stylesheet"></link>
       
 </head>
 <body>
